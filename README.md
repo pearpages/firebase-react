@@ -221,3 +221,4 @@ export default App;
 
 + dataRef.on('child_added')
 + dataRef.on('value')
++ dataRef.once
