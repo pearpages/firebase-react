@@ -138,3 +138,10 @@ export default App;
 
 ```
 
+## Navigate Through Database
+
+```js
+database.ref().child('AMAZINGNEWDATA').set(this.state.newData);
+database.ref().child('AMAZINGNEWDATA').push(this.state.newData);
+database.ref().child('/blah/bloh/bleh').push(this.state.newData);
+```

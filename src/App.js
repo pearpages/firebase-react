@@ -31,7 +31,7 @@ class App extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    database.ref().child('AMAZINGNEWDATA').set(this.state.newData);
+    database.ref().child('AMAZINGNEWDATA').push(this.state.newData);
   }
 
   render() {
