@@ -1,4 +1,8 @@
-.Restaurants {
+.App--header {
+  text-align: center;
+}
+
+.Characters {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
