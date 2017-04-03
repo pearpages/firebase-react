@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import './NewRestaurant.css';
+import { database } from './firebase';
 
 class NewRestaurant extends Component {
   constructor() {
@@ -8,11 +9,13 @@ class NewRestaurant extends Component {
       name: ''
     };
 
+    this.restaurantsRef = database.ref('/restaurants');
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSubmit(event) {
     event.preventDefault();
+    this.restaurantsRef.push({name: this.state.name});
   }
 
   render() {

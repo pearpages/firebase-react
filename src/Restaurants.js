@@ -8,9 +8,13 @@ class Restaurants extends Component {
     super(props);
   }
 
-  render () {
+  render() {
+    const { restaurants } = this.props;
     return (
       <section className="Restaurants">
+        {
+          map(restaurants, (restaurant, key) => <Restaurant key={ key } {...restaurant} />)
+        }
       </section>
     );
   }
