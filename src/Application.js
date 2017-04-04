@@ -18,6 +18,25 @@ class App extends Component {
     };
   }
 
+  componentDidMount() {
+    auth.onAuthStateChanged( (user) => {
+      if (user) {
+        this.setState({user});
+        this.usersRef = database.ref('/users');
+        this.userRef = this.usersRef.child(user.uid);
+
+        this.userRef.once('value').then( (snapshot) => {
+          if(snapshot.val()) {
+            return
+          } else {
+            const userData = pick(user, ['displayName', 'photoURL', 'email']);
+            this.userRef.set(userData);
+          }
+        });
+      }
+    });
+  }
+
   render() {
     const { user, users } = this.state;
 
