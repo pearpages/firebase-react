@@ -3,6 +3,7 @@ import { auth, database } from './firebase';
 import CurrentUser from './CurrentUser';
 import SignIn from './SignIn';
 import ProfileCard from './ProfileCard';
+// pick: creates a subset with the specified properties
 import pick from 'lodash/pick' ;
 import map from 'lodash/map';
 import './Application.css';
@@ -33,6 +34,10 @@ class App extends Component {
             this.userRef.set(userData);
           }
         });
+
+        this.userRef.on('value', (snapshot) => {
+          this.setState({users: snapshot.val()});
+        });
       }
     });
   }
@@ -45,7 +50,20 @@ class App extends Component {
         <header className="App--header">
           <h1>Social Animals</h1>
         </header>
-        <SignIn />
+        {
+          user
+          ? <div>
+              <section className="ProfileCards">
+                {
+                  map(users, (user, uid) => {
+                    return <ProfileCard key={uid} user={user} uid={uid} />
+                  })
+                }
+              </section>
+              <CurrentUser user={user} />
+            </div>
+          : <SignIn />
+        }
       </div>
     );
   }
